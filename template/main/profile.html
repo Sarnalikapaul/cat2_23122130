@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<Html>
+
+<head>
+    <title>
+        Registration Page
+    </title>
+</head>
+
+<body bgcolor="Lightskyblue">
+    <br>
+    <br>
+    <form method="POST">
+        {% csrf_token %}
+
+        <label> Name </label>
+        <input type="text" name="name" value="{{ data.name }}" size="15" /> <br> <br>
+
+        <label>
+            Phone :
+        </label>
+        <input type="text" name="country code" value="+91" size="2" />
+        <input type="text" name="phone" value="{{ data.phone }}" size="10" /> <br> <br>
+        Address
+        <br>
+        <textarea cols="80" rows="5" id="addr" name="addr">{{ data.addr }}</textarea>
+        <br> <br>
+        Email:
+        <input type="email" value="{{ data.email }}" id="email" name="email" /> <br>
+        <br> <br>
+        <a href="{% url 'editprofile' data.user.id %}"><button type="button">Edit</button></a>
+        <a href="{% url 'deleteuser' data.user.id %}"><button type="button">Delete</button></a>
+    </form>
+    <h1 style="font-size:xx-large;">see all data</h1>
+    <h2>total users:{{ user_count }}</h2>
+    <tbody>
+        {% for data in show %}
+        <tr>
+            <td>
+                <div class="flex flex-col">
+                    <h2 class="text-lg font-semibold">
+                    </h2>
+                    
+                    <p>Name: {{ data.name }}</p>
+                    <p>Email: {{ data.email }}</p>
+                    <!-- Add more fields as needed -->
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</body>
+
+</html>
+
+{% endblock content %}
